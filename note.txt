@@ -1,0 +1,338 @@
+window.Parsley.addValidator('dateformat', {
+    validate: function(value, id) {
+        var isValid = moment(value, "DD/MM/YYYY", true).isValid();
+        return isValid;
+    },
+    messages: {
+        en: 'Please provide date in format dd/mm/yyyy'
+    }
+}) 
+
+
+
+
+
+
+
+                echo "entry -> " . PHP_EOL;
+                print_r($entryDate) . PHP_EOL;
+                echo "min -> " . PHP_EOL;
+                print_r($minDate) . PHP_EOL;
+                echo "max -> " . PHP_EOL;
+                print_r($maxDate) . PHP_EOL;
+
+                $d1 = DateTime::createFromFormat($format, '2020-12-29', new DateTimeZone(WB_CURRENT_TIMEZONE)); //new DateTime('2020-12-29');
+$d2 = DateTime::createFromFormat($format, '2020-11-28', new DateTimeZone(WB_CURRENT_TIMEZONE)); //new DateTime('2020-11-28');
+var_dump($d1 == $d2);
+var_dump($d1 > $d2);
+var_dump($entry > $minDate);
+var_dump($d1 < $d2);
+
+                if ($entryDate > $minDate) 
+                    echo "entry is latest than minDate"; 
+                else
+                    echo "entry is older than minDate"; 
+
+
+
+        <input type="hidden" id="getExamList_nonce" name="getExamList_nonce" value="<?php echo wp_create_nonce("getExamList_nonce"); ?>">
+
+
+                    new Exam(1, 'TOEFL', new Map([[ExamServiceEnum.ExamRegistration, 1000], [ExamServiceEnum.BookPurchase, 1100], [ExamServiceEnum.LessonEnrollment, 1200]])),
+                    new Exam(2, 'IELTS', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(3, 'IELTS/UKVI', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(4, 'PEARSON', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(5, 'SAT 1 or 2', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(6, 'ACT', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(7, 'GMAT', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(8, 'GRE', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+                    new Exam(9, 'ICDL', new Map([[ExamServiceEnum.ExamRegistration, 1300], [ExamServiceEnum.BookPurchase, 2000], [ExamServiceEnum.LessonEnrollment, 900]])),
+
+
+
+
+            /* echo "purchase - " . PHP_EOL;
+            print_r($purchaseValResult);
+
+            echo "studentId - " . $studentId . PHP_EOL;
+            echo "guardianId - " . $guardianId . PHP_EOL;
+            echo "purchaseId - " . $purchaseId . PHP_EOL; */
+
+
+
+            // print_r($applicationData);
+
+            // $result = null;
+
+            // $result = BaseController::toEntityArray($this->examRepository->getAll());
+
+
+
+
+<div class="list-group c-exam-list">
+
+
+
+
+                        <div data-exam="toefl" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">TOEFL</h5>
+                                <div class="flex-grow-0 d-flex flex-column align-items-start">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-toefl" name="chkExamReg-toefl" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-toefl">Exam Registration</label>
+                                            <div class="w-100"></div>
+                                            <span class="c-exam-list__service-amount">NGN 12,000</span>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-toefl" name="chkBook-toefl" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-toefl">Book</label>
+                                            <div class="w-100"></div>
+                                            <span class="c-exam-list__service-amount">NGN 4,000</span>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-toefl" name="chkLesson-toefl" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-toefl">Lesson</label>
+                                            <div class="w-100"></div>
+                                            <span class="c-exam-list__service-amount">NGN 32,400</span>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 d-flex-inline flex-wrap align-content-start c-exam-list__reg-detail c-exam-list__reg-detail--hid">
+                                        <div class="d-flex">
+                                            <div class="form-group mr-2">
+                                                <small class="text-muted d-block mb-2">PREFERRED</small>
+                                                <label for="dtpPreferredExamDate">Exam Date</label>
+                                                <input type="text" class="form-control form-control-sm" id="dtpPreferredExamDate" placeholder="Exam Date">
+                                            </div>
+                                            <div class="form-group mr-2">
+                                                <small class="text-muted d-block mb-2 hide-text">PREFERRED</small>
+                                                <label for="dtpPreferredExamLocation">Exam Location</label>
+                                                <input type="text" class="form-control form-control-sm" id="dtpPreferredExamLocation" placeholder="Exam Location">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="form-group mr-2">
+                                                <small class="text-muted d-block mb-2">ALTERNATIVE</small>
+                                                <label for="dtpAlternativeExamDate">Exam Date</label>
+                                                <input type="text" class="form-control form-control-sm" id="dtpAlternativeExamDate" placeholder="Exam Date">
+                                            </div>
+                                            <div class="form-group">
+                                                <small class="text-muted d-block mb-2 hide-text">ALTERNATIVE</small>
+                                                <label for="dtpAlternativeExamLocation">Exam Location</label>
+                                                <input type="text" class="form-control form-control-sm" id="dtpAlternativeExamLocation" placeholder="Exam Location">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 d-flex justify-content-end align-items-baseline c-exam-list__item-total">
+                                    <div class="c-exam-list__currency float-right">NGN</div>
+                                    <span class="c-exam-list__amount float-right">65,800</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-exam="ielts" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">IELTS</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-ielts" name="chkExamReg-ielts" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-ielts">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-ielts" name="chkBook-ielts" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-ielts">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-ielts" name="chkLesson-ielts" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-ielts">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div data-exam="ukvi" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">IELTS/UKVI</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-ukvi" name="chkExamReg-ukvi" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-ukvi">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-ukvi" name="chkBook-ukvi" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-ukvi">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-ukvi" name="chkLesson-ukvi" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-ukvi">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div data-exam="pearson" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">PEARSON</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-pearson" name="chkExamReg-pearson" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-pearson">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-pearson" name="chkBook-pearson" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-pearson">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-pearson" name="chkLesson-pearson" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-pearson">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div data-exam="sat" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">SAT 1 or 2</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-sat" name="chkExamReg-sat" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-sat">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-sat" name="chkBook-sat" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-sat">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-sat" name="chkLesson-sat" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-sat">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                        
+                        <div data-exam="act" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">ACT</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-act" name="chkExamReg-act" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-act">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-act" name="chkBook-act" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-act">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-act" name="chkLesson-act" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-act">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                    
+                        <div data-exam="gmat" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">GMAT</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-gmat" name="chkExamReg-gmat" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-gmat">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-gmat" name="chkBook-gmat" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-gmat">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-gmat" name="chkLesson-gmat" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-gmat">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                    
+                        <div data-exam="gre" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">GRE</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-gre" name="chkExamReg-gre" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-gre">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-gre" name="chkBook-gre" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-gre">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-gre" name="chkLesson-gre" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-gre">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                    
+                        <div data-exam="icdl" class="list-group-item c-exam-list__item">
+                            <div class="d-flex flex-column flex-md-row">
+                                <h5 class="pr-4 c-exam-list__item-title">ICDL</h5>
+                                <div class="flex-grow-1 d-flex flex-column">
+                                    <div class="d-flex flex-row">
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkExamReg-icdl" name="chkExamReg-icdl" data-service="exam-reg" data-price="1000">
+                                            <label class="custom-control-label" for="chkExamReg-icdl">Exam Registration</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mr-3">
+                                            <input type="checkbox" class="custom-control-input" id="chkBook-icdl" name="chkBook-icdl" data-service="book" data-price="1000">
+                                            <label class="custom-control-label" for="chkBook-icdl">Book</label>
+                                        </div>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="chkLesson-icdl" name="chkLesson-icdl" data-service="lesson" data-price="1000">
+                                            <label class="custom-control-label" for="chkLesson-icdl">Lesson</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+function MyError(message, fileName, lineNumber) {
+    var err = new Error();
+
+    if (err.stack) {
+        // remove one stack level:
+        if (typeof(Components) != 'undefined') {
+            // Mozilla:
+            this.stack = err.stack.substring(err.stack.indexOf('\n')+1);
+        }
+        else if (typeof(chrome) != 'undefined' || typeof(process) != 'undefined') {
+            // Google Chrome/Node.js:
+            this.stack = err.stack.replace(/\n[^\n]*/,'');
+        }
+        else {
+            this.stack = err.stack;
+        }
+    }
+    this.message    = message    === undefined ? err.message    : message;
+    this.fileName   = fileName   === undefined ? err.fileName   : fileName;
+    this.lineNumber = lineNumber === undefined ? err.lineNumber : lineNumber;
+}
+
+MyError.prototype = new Error();// <-- remove this if you do not 
+                                //     want MyError to be instanceof Error
+MyError.prototype.constructor = MyError;
+MyError.prototype.name = 'MyError';

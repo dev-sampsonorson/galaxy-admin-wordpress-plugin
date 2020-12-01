@@ -1,0 +1,118 @@
+@mixin rem($property, $value) {
+    #{$property}: $value;
+    #{$property}: rem($value);
+}
+
+@mixin clearfix($important: false) {
+    // Determine whether or not to make declarations important.
+    @if $important == false {
+        $important: null;
+    }
+    @else {
+        $important: !important;
+    }
+
+    &:after {
+        content: "" $important;
+        display: table $important;
+        clear: both $important;
+    }
+}
+
+@mixin calc($key, $value) {
+    // #{$key}: -webkit-calc(#{$value});
+    // #{$key}: -moz-calc(#{$value});
+    #{$key}: calc(#{$value});
+}
+
+@mixin min-height($value) {
+    min-height: $value;
+    height: auto !important;
+    height: $value;
+}
+
+@mixin hover {
+    &:hover {
+        @content;
+    }
+}
+
+@mixin hover-focus {
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+@mixin plain-hover-focus {
+    &,
+    &:hover,
+    &:focus {
+        @content;
+    }
+}
+
+@mixin hover-focus-active {
+    &:hover,
+    &:focus,
+    &:active {
+        @content;
+    }
+}
+
+@mixin visually-hidden {
+    position: absolute;
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    width: 1px;
+}
+
+@mixin text-selection-none {
+    user-select: none; /* supported by Chrome and Opera */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none;
+}
+
+@mixin text-selection-text {
+    user-select: text; /* supported by Chrome and Opera */
+    -webkit-user-select: text; /* Safari */
+    -khtml-user-select: text; /* Konqueror HTML */
+    -moz-user-select: text; /* Firefox */
+    -ms-user-select: text;
+}
+
+@mixin text-selection-all {
+    user-select: all; /* supported by Chrome and Opera */
+    -webkit-user-select: all; /* Safari */
+    -khtml-user-select: all; /* Konqueror HTML */
+    -moz-user-select: all; /* Firefox */
+    -ms-user-select: all;
+}
+
+@mixin text-selection-auto {
+    user-select: auto; /* supported by Chrome and Opera */
+    -webkit-user-select: auto; /* Safari */
+    -khtml-user-select: auto; /* Konqueror HTML */
+    -moz-user-select: auto; /* Firefox */
+    -ms-user-select: auto;
+}
+
+@mixin text-selection-contain {
+    user-select: contain;
+    -webkit-user-select: contain;
+    -khtml-user-select: contain;
+    -moz-user-select: contain;
+    -ms-user-select: element; /*Only IE supports user-select contain option*/
+}
+
+@mixin hide-text() {
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}

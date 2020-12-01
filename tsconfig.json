@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "ES6",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "traceResolution": true,
+    // "lib": ["DOM", "ES5", "ScriptHost"],
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "outDir": "./wwwroot/js",
+    "removeComments": false, 
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "types": ["node"],
+
+    "watch": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "dist"],
+  "include": [
+      "./src/**/*",      
+      "./src/modules/**/*"
+  ]
+}

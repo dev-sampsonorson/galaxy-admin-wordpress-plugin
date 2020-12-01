@@ -1,0 +1,6 @@
+$base-font-size: 16px;
+
+
+@function rem($number) {
+    @return $number / $base-font-size * 1rem;
+}

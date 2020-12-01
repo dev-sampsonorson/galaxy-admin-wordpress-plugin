@@ -1,0 +1,267 @@
+// @import "~bootstrap";
+// @import "./node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css";
+
+@import "utility.functions";
+@import "utility.mixins";
+
+html {
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+* {
+    text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -webkit-text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+
+    &,
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
+}
+
+.hide-text {
+    @include hide-text;
+}
+
+.c-wizard-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+
+    // height: 80px;
+    white-space: nowrap;
+    outline: none;
+
+    &__line {
+        flex: auto;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: #e2e8f0;
+        height: 0;
+        margin: 0 -16px;
+        padding-top: 4px;
+        min-width: 32px;
+    }
+
+    &__step {
+        cursor: pointer;
+        flex: 0 0 auto;
+        list-style-type: none;
+        color: #27303f;
+
+        // font-size: .875rem;
+        font-size: 1rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        padding: 0 rem(24px);
+        outline: none;
+        overflow: hidden;
+
+        @include min-height(72px);
+
+        &:hover {
+            background: rgba(151, 166, 186, 0.12);
+        }
+    }
+
+    &__indicator {
+        position: relative;
+        flex: none;
+        margin-right: 8px;
+        border-radius: 50%;
+        height: 24px;
+        width: 24px;
+        color: #f0f5ff;
+        background-color: #64748b;
+
+        @include text-selection-none;
+    }
+
+    &__indicator > &__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        white-space: nowrap;
+        font-size: .875rem;
+    }
+
+    &__description {
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 50px;
+        vertical-align: middle;
+        font-weight: 400;
+        color: #64748b;
+
+        @include text-selection-none;
+    }
+
+    &__step--active &__indicator {
+        background-color: #1D4CA1;
+    }
+
+    &__step--completed &__indicator {
+        background-color: #6EBD41;
+    }
+
+    &__step--active &__description {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #27303f !important;
+    }
+}
+
+/* c-wizard-form */
+.c-wizard-form {
+    display: block;
+    margin: 0px;
+    padding: 0 24px 24px 24px;
+    font-size: .875rem;
+
+    &__content {
+        outline: 0;
+        overflow: hidden;
+
+        @include min-height(500px);
+    }
+
+    &__section {
+        visibility: hidden;
+        overflow: hidden;
+        height: 0;
+        padding-right: 5px;
+        padding-left: 5px;
+
+        &--show {
+            visibility: visible;
+
+            @include min-height(500px);
+        }
+    }
+
+    &__info {
+        margin: 24px 0;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        outline: 0;
+        padding-top: 24px;
+    }
+
+    &__button {
+        background-color: #27303f;
+        border-color: #27303f;
+
+        &--disabled {
+            background-color: #6c757d;
+            border-color: #6c757d;
+        }
+
+        &--progress {
+            background-color: #1D4CA1;
+            border-color: #1D4CA1;
+        }
+
+        &--back {
+            margin-right: 12px;
+        }
+    }
+}
+
+.c-exam-list {
+    position: relative;
+    padding-top: 10px;
+
+    @include clearfix;
+
+    &__item {
+        &-title {
+            width: 150px;
+        }
+    }
+
+    &__total {
+        float: right;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-right: 20px;
+
+        .c-exam-list__currency {
+            font-size: rem(16px);
+            font-weight: 600;
+        }
+
+        .c-exam-list__amount {
+            font-size: rem(16px);
+            font-weight: 600;
+        }
+    }
+
+    &__reg-detail {
+        display: none !important;
+
+        &--show {
+            display: block !important;
+        }
+    }
+
+    &__service-amount {
+        font-size: rem(12px);
+    }
+
+    &__item-total {
+        white-space: nowrap;
+    }
+
+    &__currency {
+        display: inline-block;
+        font-size: rem(14px);
+        font-weight: 400;
+        padding-right: 4px;
+    }
+
+    &__amount {
+        font-size: rem(16px);
+        font-weight: 400;
+        line-height: 1.25;
+    }
+
+    &__error &__item {
+        border-color: #dc3545;
+    }
+
+    &__error &__error-desc {
+        visibility: visible !important;
+    }
+
+    & &__error-desc {
+        position: absolute;
+        top: -10px;
+        right: 6px;
+        font-size: 12px;
+        text-transform: uppercase;
+        color: #dc3545;
+        pointer-events: none;
+        background-color: none;
+        z-index: 3;
+        visibility: hidden;
+    }
+}
+
+.radio-control__error .form-check-label {
+    color: #dc3545;
+}
