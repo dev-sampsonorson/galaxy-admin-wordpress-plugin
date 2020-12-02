@@ -1,1 +1,0 @@
-galaxy-admin-wordpress-plugin
