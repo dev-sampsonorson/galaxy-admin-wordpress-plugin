@@ -185,7 +185,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             usedInputs: ['INPUT', 'SELECT'],
 
-            defaultSectionIndex: 2,
+            defaultSectionIndex: 0,
 
             tabActiveClass: "c-wizard-nav__step--active",
             tabCompletedClass: "c-wizard-nav__step--completed",

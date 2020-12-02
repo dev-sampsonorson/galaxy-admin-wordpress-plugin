@@ -6,17 +6,17 @@
 
     class Guardian extends BaseEntity {
 
-        protected string $studentId;
-        protected string $lastName;
-        protected string $firstName;
-        protected string $country;
-        protected string $state;
-        protected string $educationalBackground;
-        protected string $occupation;
-        protected string $currentPosition;
-        protected string $officeAddress;
-        protected string $emailAddress;
-        protected string $phoneNumber;
+        protected $studentId; // int
+        protected $lastName; // string
+        protected $firstName; // string
+        protected $country; // string
+        protected $state; // string
+        protected $educationalBackground; // string
+        protected $occupation; // string
+        protected $currentPosition; // string
+        protected $officeAddress; // string
+        protected $emailAddress; // string
+        protected $phoneNumber; // string
 
         public function __construct(array $config) {
             parent::__construct($config);

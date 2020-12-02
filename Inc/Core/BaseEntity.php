@@ -5,9 +5,9 @@
      */
 
     abstract class BaseEntity {
-        protected int $id = 0;
-        protected ?DateTime $insertDate = null;
-        protected ?DateTime $updateDate = null;
+        protected $id = 0; // int
+        protected $insertDate = null; // ?DateTime 
+        protected $updateDate = null; // ?DateTime 
 
         protected function __construct(array $config) {
             // , ?DateTime $insertDate, ?DateTime $updateDate, int $id = 0

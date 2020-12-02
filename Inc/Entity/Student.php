@@ -6,22 +6,22 @@
 
     class Student extends BaseEntity {
 
-        protected string $title;
-        protected string $lastName;
-        protected string $firstName;
-        protected string $otherNames;
-        protected string $gender;
-        protected DateTime $birthDate;
-        protected string $firstLanguage;
-        protected string $country;
-        protected string $state;
-        protected string $phoneNumber;
-        protected string $passportNumber;
-        protected DateTime $expiryDate;
-        protected string $permanentAddress;
-        protected string $currentLevelOfStudy;
-        protected string $nextLevelOfStudy;
-        protected bool $deleted;
+        protected $title; // string 
+        protected $lastName; // string 
+        protected $firstName; // string 
+        protected $otherNames; // string 
+        protected $gender; // string 
+        protected $birthDate; // DateTime
+        protected $firstLanguage; // string 
+        protected $country; // string 
+        protected $state; // string 
+        protected $phoneNumber; // string 
+        protected $passportNumber; // string 
+        protected $expiryDate; // DateTime
+        protected $permanentAddress; // string 
+        protected $currentLevelOfStudy; // string 
+        protected $nextLevelOfStudy; // string 
+        protected $deleted; // bool
 
         public function __construct(array $config) {
             parent::__construct($config);

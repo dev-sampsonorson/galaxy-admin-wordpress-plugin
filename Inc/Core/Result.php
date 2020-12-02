@@ -6,8 +6,8 @@
 
     class Result {
         
-        private bool $status;
-        private string $message;
+        private $status;
+        private $message;
         private $successResult;
         private $errorResult;
         
@@ -31,11 +31,11 @@
             return new Result(false, null, $key, $errorResult, $message);
         }
 
-        public function getStatus(): bool {
+        public function isSuccessful() {
             return $this->status;
         }
 
-        public function getMessage(): string {
+        public function getMessage() {
             return $this->message;
         }
 
@@ -56,7 +56,7 @@
 
         public function toArray() : array {
             return array(
-                "status" => $this->status,
+                "success" => $this->status,
                 "key" => $this->key,
                 "message" => $this->message,
                 "successResult" => $this->successResult,

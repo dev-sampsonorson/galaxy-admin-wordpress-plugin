@@ -6,19 +6,19 @@
 
     class PurchaseItem extends BaseEntity {
 
-        protected int $purchaseId;
-        protected int $examId;
-        protected bool $examRegistration;
-        protected bool $bookPurchase;
-        protected bool $lessonEnrolment;
-        protected DateTime $preferredExamDate;
-        protected DateTime $alternativeExamDate;
-        protected string $preferredExamLocation;
-        protected string $alternativeExamLocation;
-        protected float $examRegistrationPrice;
-        protected float $bookPurchasePrice;
-        protected float $lessonEnrolmentPrice;
-        protected float $itemTotal;
+        protected $purchaseId; // int
+        protected $examId; // int
+        protected $examRegistration; // bool
+        protected $bookPurchase; // bool
+        protected $lessonEnrolment; // bool
+        protected $preferredExamDate; // DateTime
+        protected $alternativeExamDate; // DateTime
+        protected $preferredExamLocation; // string
+        protected $alternativeExamLocation; // string
+        protected $examRegistrationPrice; // float
+        protected $bookPurchasePrice; // float
+        protected $lessonEnrolmentPrice; // float
+        protected $itemTotal; // float
 
         public function __construct(array $config) {
             parent::__construct($config);

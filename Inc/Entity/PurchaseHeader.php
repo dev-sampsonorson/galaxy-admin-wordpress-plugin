@@ -6,11 +6,11 @@
 
     class PurchaseHeader extends BaseEntity {
 
-        protected int $studentId;
-        protected string $emailAddress;
-        protected float $total;
-        protected bool $isPaid = false;
-        protected array $items = [];
+        protected $studentId; // int 
+        protected $emailAddress; // string
+        protected $total; // float
+        protected $isPaid = false; // bool
+        protected $items = []; // array
 
         public function __construct(array $config) {
             parent::__construct($config);

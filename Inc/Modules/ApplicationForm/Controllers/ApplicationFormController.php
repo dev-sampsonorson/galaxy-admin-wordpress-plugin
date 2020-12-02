@@ -14,11 +14,11 @@ class ApplicationFormController extends BaseController
 
     private $post_id;
     private $validator;
-    private ExamRepository $examRepository;
-    private StudentValidator $studentValidator;
-    private GuardianValidator $guardianValidator;
-    private PurchaseHeaderValidator $purchaseHeaderValidator;
-    private PurchaseItemValidator $purchaseItemValidator;
+    private $examRepository; // ExamRepository
+    private $studentValidator; // StudentValidator
+    private $guardianValidator; // GuardianValidator
+    private $purchaseHeaderValidator; // PurchaseHeaderValidator
+    private $purchaseItemValidator; // PurchaseItemValidator
 
     private const EXAM_REGISTRATION = 'exam-registration';
     private const BOOK_PURCHASE = 'book-purchase';
@@ -77,7 +77,7 @@ class ApplicationFormController extends BaseController
                 return $this->return_json_error(500, 'Invalid request');
             }
             
-            $validationResultList = array(null, null, null);
+            $validationResultList = array(0 => null, 1 => null, 2 => null);
             $applicationData = json_decode(stripslashes($_POST['data']));
 
             // Get Entities
@@ -90,17 +90,14 @@ class ApplicationFormController extends BaseController
             $guardianValidationResult = $this->validateGuardianData($guardianEntity);
             $purchaseValidationResult = $this->validatePurchaseData($purchaseEntity);
 
-            if ($purchaseValidationResult->getStatus())
+            if (!$purchaseValidationResult->isSuccessful())
                 $validationResultList[0] = $purchaseValidationResult->getErrorResult();
 
-            if ($studentValidationResult->getStatus())
+            if (!$studentValidationResult->isSuccessful())
                 $validationResultList[1] = $studentValidationResult->getErrorResult();
 
-            if ($guardianValidationResult->getStatus())
+            if (!$guardianValidationResult->isSuccessful())
                 $validationResultList[2] = $guardianValidationResult->getErrorResult();
-
-            // print_r($purchaseValidationResult->getErrorResult());
-            print_r($validationResultList);
 
             if (count($validationResultList) > 0) {
                 $mergedValidationResult = Result::fromErrorWithResult(
@@ -115,19 +112,19 @@ class ApplicationFormController extends BaseController
             // Save Application
             $studentResult = $this->saveStudentData($studentEntity);
 
-            if (!$studentResult->getStatus())
+            if (!$studentResult->isSuccessful())
                 return $this->return_json_error(400, $studentResult->getMessage(), $studentResult->toArray());
 
             $studentId = $studentResult->getSuccessResult()->getId();
 
             $guardianResult = $this->saveGuardianData($studentId, $guardianEntity);
 
-            if (!$guardianResult->getStatus())
+            if (!$guardianResult->isSuccessful())
                 return $this->return_json_error(400, $guardianResult->getMessage(), $guardianResult->toArray());
 
             $purchaseHeaderResult = $this->savePurchaseData($studentId, $purchaseEntity);
 
-            if (!$purchaseHeaderResult->getStatus())
+            if (!$purchaseHeaderResult->isSuccessful())
                 return $this->return_json_error(400, $purchaseHeaderResult->getMessage(), $purchaseHeaderResult->toArray());
             
             return $this->return_json(200, array(

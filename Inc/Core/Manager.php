@@ -1,19 +1,12 @@
 <?php
-    use \Spatie\Enum\Enum;
-
-    /**
-     * @method static self add()
-     * @method static self delete()
-     */
-    class OperationEnum extends Enum {
-
-    }
-
     /**
      * @package Galaxy Admin Plugin
      */
 
     class Manager extends BaseController {
+
+        private const ADD = 1;
+        private const DELETE = 1;
 
         private static $tables = array(
             BaseRepository::EXAM_TABLE_NAME => array(
@@ -127,15 +120,15 @@
             
             // when creating tables
             // add_option('galaxy_admin_db_version', GALAXY_ADMIN_DB_VERSION);
-            Manager::addOrRemoveGalaxyAdminDbVersion(OperationEnum::add());
+            Manager::addOrRemoveGalaxyAdminDbVersion(self::ADD);
         }
 
-        private static function addOrRemoveGalaxyAdminDbVersion(OperationEnum $operation) {
-            if ($operation == OperationEnum::add()) {
+        private static function addOrRemoveGalaxyAdminDbVersion($operation) {
+            if ($operation == self::ADD) {
                 add_option('galaxy_admin_db_version', GALAXY_ADMIN_DB_VERSION);
             } 
             
-            if ($operation == OperationEnum::delete()) {
+            if ($operation == self::DELETE) {
                 delete_option('galaxy_admin_db_version');
             }
         }
@@ -158,7 +151,7 @@
                 dbDelta($sql);
     
                 // add_option('galaxy_admin_db_version', GALAXY_ADMIN_DB_VERSION);
-                Manager::addOrRemoveGalaxyAdminDbVersion(OperationEnum::add());
+                Manager::addOrRemoveGalaxyAdminDbVersion(self::ADD);
             }
             catch(Exception $e) {
                 return false;
@@ -237,7 +230,7 @@
         public static function uninstall() {
             // when deleting tables
             // delete_option('galaxy_admin_db_version');
-            Manager::addOrRemoveGalaxyAdminDbVersion(OperationEnum::delete());
+            Manager::addOrRemoveGalaxyAdminDbVersion(self::DELETE);
 
             foreach(Manager::$tables as $table_name => $value) {
                 $result = Manager::removeTable($table_name, Manager::$tables[$table_name]);

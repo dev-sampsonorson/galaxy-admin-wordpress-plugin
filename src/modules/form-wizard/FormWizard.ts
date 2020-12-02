@@ -6,9 +6,13 @@ import Parsley from 'parsleyjs';
 import moment from 'moment';
 import 'bootstrap-datepicker';
 import { result } from "lodash";
+import FormNotification from "../form-notification/FormNotification";
+import ValidationError from "../app-error/ValidationError";
 
 
 
+
+//this.notificationForm?.show(NotificationStatus.Danger, "Problem retrieving media location information");
 export default class FormWizard {
     private wrapperEl: HTMLElement;
     private tabWrapperEl: Element;
@@ -41,6 +45,8 @@ export default class FormWizard {
     private validationInstance;
 
     private wizardData: any[];
+    
+    private notificationForm: FormNotification | null = null;
 
     // private defaultSectionName: string;
 
@@ -122,6 +128,11 @@ export default class FormWizard {
     }
 
     setup() {
+        this.notificationForm = new FormNotification({
+            containerId: 'student-application-notification',
+            messageElClass: 'alert-message'
+        });
+
         $('.date-control').datepicker({
             format: 'yyyy-mm-dd',
             weekStart: 1,
@@ -471,6 +482,7 @@ export default class FormWizard {
                 console.log('inside then', result);
             })
             .catch(error => {
+
                 console.log('error', error);
             });
 
@@ -484,19 +496,17 @@ export default class FormWizard {
         data.append("nonce", frontend_script_config.saveApplicationNonce);
         data.append("data", JSON.stringify(applicationData));
 
-        console.log(applicationData);
-
         const response = await fetch(url, {
             method: "POST",
             body: new URLSearchParams(data as URLSearchParams)
         });
 
-        if (response.status !== 200)
-            throw new Error("Unable to save application");
-
         const result = await response.json();
 
         console.log('result', result);
+
+        if (response.status !== 200)
+            throw new Error("Unable to save application");
 
         return result;
     }

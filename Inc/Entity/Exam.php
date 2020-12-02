@@ -6,10 +6,10 @@
 
     class Exam extends BaseEntity {
 
-        protected string $examName;
-        protected float $examRegistrationPrice;
-        protected float $bookPurchasePrice;
-        protected float $lessonEnrolmentPrice;
+        protected $examName; // string 
+        protected $examRegistrationPrice; // float 
+        protected $bookPurchasePrice; // float
+        protected $lessonEnrolmentPrice; // float
 
         public function __construct(array $config) {
             parent::__construct($config);

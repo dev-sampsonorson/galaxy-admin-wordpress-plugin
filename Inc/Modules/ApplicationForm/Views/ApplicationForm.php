@@ -1,5 +1,11 @@
 <h1>Application Form</h1>
 <button id="btnJustClick" type="button" class="btn btn-primary">Just Click</button>
+<div id="student-application-notification" class="alert alert-dismissible fade d-none" role="alert">
+        <div class="alert-message"></div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 <div id="student-reg-form" class="c-wizard">
     <div class="c-wizard-nav c-wizard__nav">
         <div data-section-name="purchases" data-section-index="0" class="c-wizard-nav__step">
