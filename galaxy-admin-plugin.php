@@ -27,17 +27,10 @@
     define ('GALAXY_ADMIN_DB_VERSION', '1.0' );
     define ('GALAXY_APPLICATION_FORM_SLUG', 'application-form' );
 
+    define ('GALAXY_SECRET_KEY', '');
+    define ('GALAXY_PUBLIC_KEY', '');
+
     date_default_timezone_set(WB_CURRENT_TIMEZONE);
-
-
-    // print_r($_SERVER['REQUEST_URI']);
-
-
-    /* echo "before";
-    echo defined('EXAMPLE');
-    define ('EXAMPLE', 'ddd' );
-    echo "after";
-    echo defined('EXAMPLE'); */
 
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 

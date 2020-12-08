@@ -36,6 +36,12 @@ export interface IFormWizardConfig {
     validatableControlSelector: string;
 
     supportedExams: Exam[];
+
+    doneMessageDisplaySelector: string;
+    successMessage: string;
+    processingMessage: string;
+
+    publicKey: string;
 }
 
 export interface IFormWizardViewModel {
@@ -136,7 +142,7 @@ export interface IGuardianData {
     firstName: string;
     educationalBackground: string;
     occupation: string;
-    currentPosition: string;
+    // currentPosition: string;
     officeAddress: string;
     emailAddress: string;
     phoneNumber: string;

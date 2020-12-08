@@ -12,7 +12,12 @@ interface JQuery {
 
 
 declare const frontend_script_config: {
+    publicKey: string;
     ajaxRequestUrl: string;
     getExamListNonce: string;
     saveApplicationNonce: string;
+    generatePaymentRefNonce: string;
+    verifyTransactionNonce: string;
 };
+
+declare const PaystackPop: any;

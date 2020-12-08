@@ -6,13 +6,14 @@ import Parsley from 'parsleyjs';
 import moment from 'moment';
 import 'bootstrap-datepicker';
 import { result } from "lodash";
-import FormNotification from "../form-notification/FormNotification";
+import FormNotification, { NotificationStatus } from "../form-notification/FormNotification";
 import ValidationError from "../app-error/ValidationError";
+import { mainModule } from "process";
 
 
 
 
-//this.notificationForm?.show(NotificationStatus.Danger, "Problem retrieving media location information");
+//
 export default class FormWizard {
     private wrapperEl: HTMLElement;
     private tabWrapperEl: Element;
@@ -45,14 +46,19 @@ export default class FormWizard {
     private validationInstance;
 
     private wizardData: any[];
+    private publicKey: string;
     
     private notificationForm: FormNotification | null = null;
+
+    private doneMessageEl: HTMLElement;
 
     // private defaultSectionName: string;
 
     constructor(private config: IFormWizardConfig) {
         this.wizardData = [];
         this.itemTotal = new Map();
+
+        this.publicKey = this.config.publicKey;
 
         this.wrapperEl = document.getElementById(this.config.targetId)!;
         this.tabWrapperEl = this.wrapperEl?.querySelector(this.config.tabWrapperSelector)!;
@@ -82,6 +88,9 @@ export default class FormWizard {
         this.tabEls = Array.from(this.tabWrapperEl?.querySelectorAll(`:scope *[${this.config.sectionNameAttr}]`)!) as HTMLElement[];
         this.sectionEls = Array.from(this.sectionWrapperEl?.querySelectorAll(`:scope *[${this.config.sectionNameAttr}]`)!) as HTMLElement[];
 
+        this.doneMessageEl = document.querySelector(this.config.doneMessageDisplaySelector)! as HTMLElement;
+        this.doneMessageEl.innerHTML = this.config.processingMessage;
+
         if (!this.wrapperEl || this.tabEls.length === 0 || this.sectionEls.length === 0)
             throw new Error("Invalid FormWizard document structure");
 
@@ -92,7 +101,8 @@ export default class FormWizard {
         this.registerCustomValidators();
         this.setup();
 
-        document.getElementById("btnJustClick")?.addEventListener('click', this.sampleAction.bind(this), false);
+        // document.getElementById("btnJustClick")?.addEventListener('click', this.sampleAction.bind(this), false);
+        // document.getElementById("btnJustPay")?.addEventListener('click', this.makePayment.bind(this), false);
     }
 
     loadCountryDropdown(selectedCountryCode: string) {
@@ -397,8 +407,8 @@ export default class FormWizard {
     }
     calcPurchaseTotal(): number {
         let totalPayable: number = 0;
-        Array.from(this.itemTotal.values() || []).forEach((lineAbout) => {
-            totalPayable += lineAbout.reduce((x1, x2) => x1 + x2, 0);
+        Array.from(this.itemTotal.values() || []).forEach((line) => {
+            totalPayable += line.reduce((x1, x2) => x1 + x2, 0);
         });
 
         return totalPayable;
@@ -414,77 +424,93 @@ export default class FormWizard {
 
     toggleButtonsVisibility(sectionIndex: number) {
         // sectionIndex is the section we are heading to
-        this.prevButtonEl.classList.toggle("invisible", sectionIndex === 0);
+        this.prevButtonEl.classList.toggle("invisible", sectionIndex === 0 || sectionIndex === this.lastSectionIndex);
         this.nextButtonEl.classList.toggle("invisible", sectionIndex === this.lastSectionIndex);
         // this.submitButtonEl.classList.toggle("d-none", sectionIndex < this.lastSectionIndex);
     }
 
-    sampleData() {
-        return [
-            {
-                "emailAddress": "example@gmail",
-                "total": 3000,
-                "purchases": [
-                    {
-                        "examId": 1,
-                        "examName": "toefl",
-                        "selectedServices": [
-                            "exam-registration",
-                            "book-purchase",
-                            "lesson-enrolment"
-                        ],
-                        "preferredExamDate": "2020-12-30",
-                        "preferredExamLocation": "Location 1",
-                        "alternativeExamDate": "2020-12-30",
-                        "alternativeExamLocation": "Location 2",
-                        "examRegistrationPrice": 1000,
-                        "bookPurchasePrice": 1000,
-                        "lessonEnrolmentPrice": 1000,
-                        "itemTotal": 3000
+    async makePayment() {
+        let data = this.wizardData;
+
+        try {
+            const paymentRef = await this.generatePaymentReference();
+            const amountToCharge = (data[0].total || 0) * 100;
+            const emailAddress = data[0].emailAddress;
+
+            if (!paymentRef)
+                throw new Error('Unable to process payment');
+            
+            if (amountToCharge === 0)
+                throw new Error('Unable to process payment');
+
+            const handler = PaystackPop.setup({
+                key: this.publicKey, // This is your public key only
+                email: emailAddress, // customer email
+                amount: amountToCharge, // the amount charged
+                ref: paymentRef, // generate a random reference number
+                metadata: { // more custom information about the transaction
+                    custom_fields: [
+                        {}
+                    ]
+                },
+                callback: async (response) => {
+                    const result = await this.verifyTransaction(response.reference);
+                    if (result.status) {
+                        this.saveApplication(data) 
+                            .then(result => {
+                                this.doneMessageEl.innerHTML = this.config.successMessage;
+                                this.notificationForm?.show(NotificationStatus.Success, "Your application submission and payment is successful!");
+                            })
+                            .catch(error => {
+                                this.notificationForm?.show(NotificationStatus.Danger, "Unable to save application and make payment!");
+                            });
                     }
-                ]
-            },
-            {
-                "title": "Mr",
-                "lastName": "John",
-                "firstName": "Doe",
-                "otherName": "",
-                "gender": "1",
-                "birthDate": "2020-11-27",
-                "firstLanguage": "Hausa",
-                "country": "Nigeria",
-                "state": "Abia",
-                "phoneNumber": "09038843321",
-                "passportNumber": "dfadfafdsfd",
-                "passportExpiryDate": "2020-11-30",
-                "permanentAddress": "dfafsafdsafdsaf",
-                "currentLevelOfStudy": "dfasdfdsfasfdsf",
-                "nextLevelOfStudy": "dsfsafsfdsafdsf"
-            },
-            {
-                "lastName": "Ibrahim",
-                "firstName": "Sadiq",
-                "country": "Nigeria",
-                "state": "Benue",
-                "educationalBackground": "dfafdsaf",
-                "occupation": "dfaffasfds",
-                "currentPosition": "dfasfdfa",
-                "officeAddress": "dfafdasfdsfds",
-                "emailAddress": "example@gmail.com",
-                "phoneNumber": "09034544332"
-            }
-        ];
+                },
+                onClose: () => {
+                    // alert('window closed');
+                }
+            });
+
+            handler.openIframe();
+        } catch (error) {
+            this.notificationForm?.show(NotificationStatus.Danger, "Unable to process your payment, try again after a few minutes");
+        }
     }
 
-    sampleAction(e) {
-        this.saveApplication(this.sampleData())
-            .then(result => {
-                console.log('inside then', result);
-            })
-            .catch(error => {
+    async generatePaymentReference() {
+        const data = new FormData();
+        const url = frontend_script_config.ajaxRequestUrl;
 
-                console.log('error', error);
-            });
+        data.append("action", "generatePaymentRef");
+        data.append("nonce", frontend_script_config.generatePaymentRefNonce);
+
+        const response = await fetch(url, {
+            method: "POST",
+            body: new URLSearchParams(data as URLSearchParams)
+        });
+
+        if (response.status !== 200)
+            throw new Error("Unable to process payment");
+        
+        const result = (await response.json()).data.result;
+
+        return result?.ref || '';
+
+    }
+
+    async verifyTransaction(paymentReference) {
+        const url = frontend_script_config.ajaxRequestUrl + '?action=verifyTransaction&nonce=' + frontend_script_config.verifyTransactionNonce + '&reference=' + paymentReference;
+
+        const response = await fetch(url, {
+            method: "GET"
+        });
+
+        if (response.status !== 200)
+            throw new Error("Unable to process payment");
+
+        const result = (await response.json()).data.result;
+
+        return result;
 
     }
 
@@ -501,17 +527,17 @@ export default class FormWizard {
             body: new URLSearchParams(data as URLSearchParams)
         });
 
-        const result = await response.json();
+        const responseObj = await response.json();
+        const responseResult = responseObj.data.result;
 
-        console.log('result', result);
+        if (response.status !== 200) {
+            throw new ValidationError(responseResult.key, responseResult);
+        }
 
-        if (response.status !== 200)
-            throw new Error("Unable to save application");
-
-        return result;
+        return responseObj;
     }
 
-    handleNextSection(sectionIndex: number) {
+    async handleNextSection(sectionIndex: number) {
         // validate current section
         const isSectionValid = this.validateSection(this.currentSectionIndex);
 
@@ -522,18 +548,18 @@ export default class FormWizard {
 
         this.collectData(this.currentSectionIndex);
 
-        this.saveApplication(this.wizardData)
+        if (sectionIndex === this.lastSectionIndex) {
+            await this.makePayment();
+        }
+
+        /* this.saveApplication(this.wizardData)
             .then(result => {
                 console.log('inside then', result);
+                this.notificationForm?.show(NotificationStatus.Success, "You have submitted your application successfully!");
             })
             .catch(error => {
-                console.log('error', error);
-            });
-
-
-
-        console.log(this.wizardData);
-
+                this.notificationForm?.show(NotificationStatus.Danger, "Unable to save application, check the information you provided!");
+            }); */
         this.toggleButtonsVisibility(sectionIndex);
 
         // display the section
@@ -703,9 +729,12 @@ export default class FormWizard {
             
             const examIndex = +(listItemEl.getAttribute(`${this.config.examItemIndexAttr}`) || -1);
             const servicePrices = this.config.supportedExams[examIndex].servicePrices;
+            const examName = listItemEl.getAttribute(this.config.examItemAttr)!;
+
+            let total: number[] = this.itemTotal.get(examName) || [];
 
             result['examId'] = +listItemEl.getAttribute(this.config.examItemIdAttr)!;
-            result['examName'] = listItemEl.getAttribute(this.config.examItemAttr)!;
+            result['examName'] = examName;
             result['selectedServices'] = selectedServices;
             result['preferredExamDate'] = (listItemEl.querySelector(`[id^='dtpPreferredExamDate']`) as HTMLInputElement)?.value; //#-${examIndex}
             result['preferredExamLocation'] = (listItemEl.querySelector(`[id^='txtPreferredExamLocation']`) as HTMLInputElement)?.value;
@@ -714,14 +743,16 @@ export default class FormWizard {
             result['examRegistrationPrice'] = servicePrices.get(ExamServiceEnum.ExamRegistration)!;
             result['bookPurchasePrice'] = servicePrices.get(ExamServiceEnum.BookPurchase)!;
             result['lessonEnrolmentPrice'] = servicePrices.get(ExamServiceEnum.LessonEnrollment)!;
-            result['itemTotal'] = this.calcPurchaseTotal();
+            result['itemTotal'] = total.reduce((x, y) => x + y, 0); //this.calcPurchaseTotal();
+
+            // console.log('kkkkkk - ', result['itemTotal']);
 
             request.total += result['itemTotal'];
 
             request.purchases.push(result as IPurchaseItem);
         });
 
-        console.log('outcome - purchase - ', request);
+        // console.log('outcome - purchase - ', request);
         
         return request;
     }
@@ -748,7 +779,7 @@ export default class FormWizard {
             nextLevelOfStudy: (document.querySelector('#txtPersonalNextLevelOfStudy')! as HTMLInputElement).value || '',
         }
 
-        console.log('outcome - personal - ', result);
+        // console.log('outcome - personal - ', result);
 
         return result;
     }
@@ -764,13 +795,13 @@ export default class FormWizard {
             state: stateEl.options[stateEl.selectedIndex]?.text || '',
             educationalBackground: (document.querySelector('#txtGuardianEducationalBackground')! as HTMLInputElement).value || '',
             occupation: (document.querySelector('#txtGuardianOccupation')! as HTMLInputElement).value || '',
-            currentPosition: (document.querySelector('#txtGuardianCurrentPosition')! as HTMLInputElement).value || '',
+            // currentPosition: (document.querySelector('#txtGuardianCurrentPosition')! as HTMLInputElement).value || '',
             officeAddress: (document.querySelector('#txtGuardianOfficeAddress')! as HTMLInputElement).value || '',
             emailAddress: (document.querySelector('#txtGuardianEmailAddress')! as HTMLInputElement).value || '',
             phoneNumber: (document.querySelector('#txtGuardianPhoneNumber')! as HTMLInputElement).value || ''
         }
 
-        console.log('outcome - guardian - ', result);
+        // console.log('outcome - guardian - ', result);
 
         return result;
     }

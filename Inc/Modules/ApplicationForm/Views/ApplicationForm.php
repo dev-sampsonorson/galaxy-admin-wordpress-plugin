@@ -1,5 +1,6 @@
 <h1>Application Form</h1>
-<button id="btnJustClick" type="button" class="btn btn-primary">Just Click</button>
+<!-- <button id="btnJustClick" type="button" class="btn btn-primary">Just Click</button>
+<button id="btnJustPay" type="button" class="btn btn-primary">Just Pay</button> -->
 <div id="student-application-notification" class="alert alert-dismissible fade d-none" role="alert">
         <div class="alert-message"></div>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -167,7 +168,7 @@
             </div>
             <div data-section-name="guardian-info" class="c-wizard-form__section">
                 <p class="c-wizard-form__info">
-                    Guardian Information
+                    Parent or Guardian Information (used as emergency contact if the applicant is unreachable)
                 </p>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -194,18 +195,18 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="txtGuardianEducationalBackground">Educational Background</label>
                         <input type="text" class="form-control form-control-sm" id="txtGuardianEducationalBackground" name="txtGuardianEducationalBackground" required>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-6">
                         <label for="txtGuardianOccupation">Occupation</label>
                         <input type="text" class="form-control form-control-sm" id="txtGuardianOccupation" name="txtGuardianOccupation" required>
                     </div>
-                    <div class="form-group col-md-4">
+                    <!-- <div class="form-group col-md-4">
                         <label for="txtGuardianCurrentPosition">Current Position</label>
                         <input type="text" class="form-control form-control-sm" id="txtGuardianCurrentPosition" name="txtGuardianCurrentPosition" required>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -226,7 +227,8 @@
             </div>
             <div data-section-name="done" class="c-wizard-form__section">
                 <p class="c-wizard-form__info">
-                    Thank you for completing our application form and purchasing our products and services.
+                    
+                    
                 </p>
             </div>
         </div>

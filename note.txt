@@ -68,6 +68,143 @@ var_dump($d1 < $d2);
 
 
 
+    sampleData() {
+        return [
+            {
+                "emailAddress": "example@gmail.com",
+                "total": 3000,
+                "purchases": [
+                    {
+                        "examId": 1,
+                        "examName": "toefl",
+                        "selectedServices": [
+                            "exam-registration",
+                            "book-purchase",
+                            "lesson-enrolment"
+                        ],
+                        "preferredExamDate": "2021-12-30",
+                        "preferredExamLocation": "Location 1",
+                        "alternativeExamDate": "2021-12-30",
+                        "alternativeExamLocation": "Location 2",
+                        "examRegistrationPrice": 1000,
+                        "bookPurchasePrice": 1000,
+                        "lessonEnrolmentPrice": 1000,
+                        "itemTotal": 3000
+                    }
+                ]
+            },
+            {
+                "title": "Mr",
+                "lastName": "John",
+                "firstName": "Doe",
+                "otherName": "",
+                "gender": "1",
+                "birthDate": "1998-11-27",
+                "firstLanguage": "Hausa",
+                "country": "Nigeria",
+                "state": "Abia",
+                "phoneNumber": "09038843321",
+                "passportNumber": "dfadfafdsfd",
+                "passportExpiryDate": "2021-11-30",
+                "permanentAddress": "dfafsafdsafdsaf",
+                "currentLevelOfStudy": "dfasdfdsfasfdsf",
+                "nextLevelOfStudy": "dsfsafsfdsafdsf"
+            },
+            {
+                "lastName": "Ibrahim",
+                "firstName": "Sadiq",
+                "country": "Nigeria",
+                "state": "Benue",
+                "educationalBackground": "dfafdsaf",
+                "occupation": "dfaffasfds",
+                // "currentPosition": "dfasfdfa",
+                "officeAddress": "dfafdasfdsfds",
+                "emailAddress": "example@gmail.com",
+                "phoneNumber": "09034544332"
+            }
+        ];
+    }
+
+    sampleAction(e) {
+        /* this.saveApplication(this.sampleData())
+            .then(async result => {
+                this.notificationForm?.show(NotificationStatus.Success, "You have submitted your application successfully!");
+            })
+            .catch(error => {
+                this.notificationForm?.show(NotificationStatus.Danger, "Unable to save application, check the information you provided!");
+            }); */
+
+    }
+
+
+
+
+    /* (async function () {
+
+        let data = [
+            {
+                "emailAddress": "example@gmail",
+                "total": 3000,
+                "purchases": [
+                    {
+                        "examId": 1,
+                        "examName": "toefl",
+                        "selectedServices": [
+                            "exam-registration",
+                            "book-purchase",
+                            "lesson-enrolment"
+                        ],
+                        "preferredExamDate": "2020-12-30",
+                        "preferredExamLocation": "Location 1",
+                        "alternativeExamDate": "2020-12-30",
+                        "alternativeExamLocation": "Location 2",
+                        "examRegistrationPrice": 1000,
+                        "bookPurchasePrice": 1000,
+                        "lessonEnrolmentPrice": 1000,
+                        "itemTotal": 3000
+                    }
+                ]
+            },
+            {
+                "title": "Mr",
+                "lastName": "John",
+                "firstName": "Doe",
+                "otherName": "",
+                "gender": "1",
+                "birthDate": "2020-11-27",
+                "firstLanguage": "Hausa",
+                "country": "Nigeria",
+                "state": "Abia",
+                "phoneNumber": "09038843321",
+                "passportNumber": "dfadfafdsfd",
+                "passportExpiryDate": "2020-11-30",
+                "permanentAddress": "dfafsafdsafdsaf",
+                "currentLevelOfStudy": "dfasdfdsfasfdsf",
+                "nextLevelOfStudy": "dsfsafsfdsafdsf"
+            },
+            {
+                "lastName": "Ibrahim",
+                "firstName": "Sadiq",
+                "country": "Nigeria",
+                "state": "Benue",
+                "educationalBackground": "dfafdsaf",
+                "occupation": "dfaffasfds",
+                "currentPosition": "dfasfdfa",
+                "officeAddress": "dfafdasfdsfds",
+                "emailAddress": "example@gmail.com",
+                "phoneNumber": "09034544332"
+            }
+        ];
+
+        console.log(data);
+
+        const result = await savePurchase(data).catch(handleError);
+    })();
+
+    return; */
+
+
+
 
 <div class="list-group c-exam-list">
 

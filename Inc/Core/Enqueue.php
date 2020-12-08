@@ -32,11 +32,15 @@
             // wp_enqueue_script( 'modernizr-js', $this->plugin_url . 'dist/js/modernizr-custom.js', array('vendor-js'), false, true);
             // wp_enqueue_script( 'frontend-js', $this->plugin_url . 'dist/js/frontend-index.plugin-bundle.js', array('modernizr-js'), microtime(), true);
 
-            wp_register_script( 'frontend-js', $this->plugin_url . 'dist/js/frontend-index.plugin-bundle.js', array('vendor-js'), microtime(), true);
+            wp_register_script( 'paystack-js', 'https://js.paystack.co/v1/inline.js', array(), false, true);
+            wp_register_script( 'frontend-js', $this->plugin_url . 'dist/js/frontend-index.plugin-bundle.js', array('vendor-js', 'paystack-js'), microtime(), true);
             $frontend_script_config = array(
+                'publicKey' => GALAXY_PUBLIC_KEY,
                 'ajaxRequestUrl' => admin_url('admin-ajax.php'),
                 'getExamListNonce' => wp_create_nonce("getExamList_nonce"),
-                'saveApplicationNonce' => wp_create_nonce("saveApplication_nonce")
+                'saveApplicationNonce' => wp_create_nonce("saveApplication_nonce"),
+                'generatePaymentRefNonce' => wp_create_nonce("generatePaymentRef_nonce"),
+                'verifyTransactionNonce' => wp_create_nonce("verifyTransaction_nonce")
             );
             wp_localize_script( 'frontend-js', 'frontend_script_config', $frontend_script_config );
             wp_enqueue_script( 'frontend-js' );

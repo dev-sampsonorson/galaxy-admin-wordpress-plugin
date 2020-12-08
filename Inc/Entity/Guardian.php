@@ -13,7 +13,7 @@
         protected $state; // string
         protected $educationalBackground; // string
         protected $occupation; // string
-        protected $currentPosition; // string
+        //protected $currentPosition; // string
         protected $officeAddress; // string
         protected $emailAddress; // string
         protected $phoneNumber; // string
@@ -42,7 +42,7 @@
                 "state" => $this->state,
                 "educationalBackground" => $this->educationalBackground,
                 "occupation" => $this->occupation,
-                "currentPosition" => $this->currentPosition,
+                // "currentPosition" => $this->currentPosition,
                 "officeAddress" => $this->officeAddress,
                 "emailAddress" => $this->emailAddress,
                 "phoneNumber" => $this->phoneNumber,

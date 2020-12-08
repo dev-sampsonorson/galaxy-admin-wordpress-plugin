@@ -25,7 +25,7 @@
                         "state" => $row->state,
                         "educationalBackground" => $row->educationalBackground,
                         "occupation" => $row->occupation,
-                        "currentPosition" => $row->currentPosition,
+                        // "currentPosition" => $row->currentPosition,
                         "officeAddress" => $row->officeAddress,
                         "emailAddress" => $row->emailAddress,
                         "phoneNumber" => $row->phoneNumber,
@@ -65,7 +65,7 @@
                         "state" => $row->state,
                         "educationalBackground" => $row->educationalBackground,
                         "occupation" => $row->occupation,
-                        "currentPosition" => $row->currentPosition,
+                        // "currentPosition" => $row->currentPosition,
                         "officeAddress" => $row->officeAddress,
                         "emailAddress" => $row->emailAddress,
                         "phoneNumber" => $row->phoneNumber,
@@ -90,7 +90,7 @@
                 $result = $this->wpdb->insert(
                     $this->getTableName(), 
                     $dataAsArray,
-                    array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
+                    array('%d', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')
                 );
 
                 if ($result === false)
@@ -128,7 +128,7 @@
                         'state' => '%s', 
                         'educationalBackground' => '%s', 
                         'occupation' => '%s', 
-                        'currentPosition' => '%s', 
+                        // 'currentPosition' => '%s', 
                         'officeAddress' => '%s', 
                         'emailAddress' => '%s', 
                         'phoneNumber' => '%s'
@@ -163,7 +163,7 @@
                         "state" => $row->state,
                         "educationalBackground" => $row->educationalBackground,
                         "occupation" => $row->occupation,
-                        "currentPosition" => $row->currentPosition,
+                        // "currentPosition" => $row->currentPosition,
                         "officeAddress" => $row->officeAddress,
                         "emailAddress" => $row->emailAddress,
                         "phoneNumber" => $row->phoneNumber,

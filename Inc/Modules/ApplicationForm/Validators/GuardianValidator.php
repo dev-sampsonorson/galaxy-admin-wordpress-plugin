@@ -34,7 +34,7 @@
                 'state' => $entityAsArray["state"],
                 'educationalBackground' => $entityAsArray["educationalBackground"],
                 'occupation' => $entityAsArray["occupation"],
-                'currentPosition' => $entityAsArray["currentPosition"],
+                // 'currentPosition' => $entityAsArray["currentPosition"],
                 'officeAddress' => $entityAsArray["officeAddress"],
                 'emailAddress' => $entityAsArray["emailAddress"],
                 'phoneNumber' => $entityAsArray["phoneNumber"]
@@ -46,7 +46,7 @@
                 'state' => 'required',
                 'educationalBackground' => 'required',
                 'occupation' => 'required',
-                'currentPosition' => 'required',
+                // 'currentPosition' => 'required',
                 'officeAddress' => 'required',
                 'emailAddress' => 'required|email',
                 'phoneNumber' => 'required'
@@ -60,7 +60,7 @@
                 'state' => 'Guardian state',
                 'educationalBackground' => 'Guardian educational background',
                 'occupation' => 'Guardian occupation',
-                'currentPosition' => 'Guardian current position',
+                // 'currentPosition' => 'Guardian current position',
                 'officeAddress' => 'Guardian office address',
                 'emailAddress' => 'Guardian email address',
                 'phoneNumber' => 'Guardian phone number'

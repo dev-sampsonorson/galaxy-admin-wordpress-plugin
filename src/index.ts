@@ -41,7 +41,7 @@ let savePurchase = async function (formData) {
     data.append("data", JSON.stringify(formData));
     // data.append("data", JSON.stringify(formData));
 
-    console.log(data);
+    // console.log(data);
 
     // new URLSearchParams(data as URLSearchParams)
     // JSON.stringify(data2)
@@ -90,76 +90,6 @@ let savePurchase = async function (formData) {
 }
 
 window.addEventListener('DOMContentLoaded', (event) => {
-
-
-    /* (async function () {
-
-        let data = [
-            {
-                "emailAddress": "example@gmail",
-                "total": 3000,
-                "purchases": [
-                    {
-                        "examId": 1,
-                        "examName": "toefl",
-                        "selectedServices": [
-                            "exam-registration",
-                            "book-purchase",
-                            "lesson-enrolment"
-                        ],
-                        "preferredExamDate": "2020-12-30",
-                        "preferredExamLocation": "Location 1",
-                        "alternativeExamDate": "2020-12-30",
-                        "alternativeExamLocation": "Location 2",
-                        "examRegistrationPrice": 1000,
-                        "bookPurchasePrice": 1000,
-                        "lessonEnrolmentPrice": 1000,
-                        "itemTotal": 3000
-                    }
-                ]
-            },
-            {
-                "title": "Mr",
-                "lastName": "John",
-                "firstName": "Doe",
-                "otherName": "",
-                "gender": "1",
-                "birthDate": "2020-11-27",
-                "firstLanguage": "Hausa",
-                "country": "Nigeria",
-                "state": "Abia",
-                "phoneNumber": "09038843321",
-                "passportNumber": "dfadfafdsfd",
-                "passportExpiryDate": "2020-11-30",
-                "permanentAddress": "dfafsafdsafdsaf",
-                "currentLevelOfStudy": "dfasdfdsfasfdsf",
-                "nextLevelOfStudy": "dsfsafsfdsafdsf"
-            },
-            {
-                "lastName": "Ibrahim",
-                "firstName": "Sadiq",
-                "country": "Nigeria",
-                "state": "Benue",
-                "educationalBackground": "dfafdsaf",
-                "occupation": "dfaffasfds",
-                "currentPosition": "dfasfdfa",
-                "officeAddress": "dfafdasfdsfds",
-                "emailAddress": "example@gmail.com",
-                "phoneNumber": "09034544332"
-            }
-        ];
-
-        console.log(data);
-
-        const result = await savePurchase(data).catch(handleError);
-    })();
-
-    return; */
-
-
-
-
-
     (async function () {
 
         const studentRegFormEl = document.getElementById('student-reg-form');
@@ -205,7 +135,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
             validatableControlSelector: 'input, textarea, select, [data-parsley-require-if], [data-parsley-min-purchase], [data-parsley-radio-required]',
 
-            supportedExams: examList
+            supportedExams: examList,
+
+            doneMessageDisplaySelector: '[data-section-name="done"] .c-wizard-form__info',
+            successMessage: 'Thank you for completing our application form and purchasing our products and services',
+            processingMessage: 'Please, wait we are processing your application and payment',
+
+            publicKey: frontend_script_config.publicKey
         });
         
     })();

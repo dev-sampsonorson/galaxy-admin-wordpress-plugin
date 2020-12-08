@@ -52,6 +52,12 @@ class ApplicationFormController extends BaseController
             
             add_action('wp_ajax_saveApplication', array($this, 'saveApplication'));
             add_action('wp_ajax_nopriv_saveApplication', array($this, 'saveApplication'));
+            
+            add_action('wp_ajax_generatePaymentRef', array($this, 'generatePaymentRef'));
+            add_action('wp_ajax_nopriv_generatePaymentRef', array($this, 'generatePaymentRef'));
+            
+            add_action('wp_ajax_verifyTransaction', array($this, 'verifyTransaction'));
+            add_action('wp_ajax_nopriv_verifyTransaction', array($this, 'verifyTransaction'));
         } else {
             // Add non-Ajax front-end action hooks here
         }
@@ -69,6 +75,66 @@ class ApplicationFormController extends BaseController
         } catch(Exception $e) {
             return return_json_error(404, 'Exams Not Found');
         }
+    }    
+
+    public function generatePaymentRef() {
+        try {
+            if (!DOING_AJAX || !check_ajax_referer('generatePaymentRef_nonce', 'nonce', false)) {
+                return $this->return_json_error(500, 'Invalid request');
+            }
+
+            $now = new DateTime('now');
+            $ref = $now->format('Y') . uniqid() . $now->format('m') . $now->format('d') .
+                   $now->format('H') . $now->format('i') . $now->format('s') .
+                   strval(microtime(true) * 10000);
+                
+            return $this->return_json(200, array( "ref" => $ref));
+        } catch(Exception $e) {
+            return return_json_error(404, 'Unable to process payment');
+        }
+
+    }
+
+    public function verifyTransaction() {
+        try {
+            if (!DOING_AJAX || !check_ajax_referer('verifyTransaction_nonce', 'nonce', false)) {
+                return $this->return_json_error(500, 'Invalid request');
+            }
+
+            $paymentReference = isset($_GET["reference"]) ? $_GET["reference"] : "";
+
+            $curl = curl_init();
+  
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.paystack.co/transaction/verify/". $paymentReference,
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "GET",
+              CURLOPT_HTTPHEADER => array(
+                "Authorization: Bearer " . GALAXY_SECRET_KEY,
+                "Cache-Control: no-cache",
+              ),
+            ));
+            
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            
+            if ($err) {
+              echo "cURL Error #:" . $err;
+              throw new Exception('CURL error');
+            }
+            
+            $responseAsArray = json_decode($response, true);
+
+            return $this->return_json(200, $responseAsArray);
+        } catch(Exception $e) {
+            return return_json_error(404, 'Unable to process payment');
+        }
+
     }
 
     public function saveApplication() {
@@ -77,7 +143,7 @@ class ApplicationFormController extends BaseController
                 return $this->return_json_error(500, 'Invalid request');
             }
             
-            $validationResultList = array(0 => null, 1 => null, 2 => null);
+            $validationResultList = [];
             $applicationData = json_decode(stripslashes($_POST['data']));
 
             // Get Entities
@@ -108,6 +174,7 @@ class ApplicationFormController extends BaseController
 
                 return $this->return_json_error(400, $mergedValidationResult->getMessage(), $mergedValidationResult->toArray());
             }
+
             
             // Save Application
             $studentResult = $this->saveStudentData($studentEntity);
@@ -144,6 +211,7 @@ class ApplicationFormController extends BaseController
         $entity = new PurchaseHeader(array(
             // "studentId" => $studentId,
             "emailAddress" => $data->emailAddress,
+            "isPaid" => true,
             "total" => floatval($data->total)
         ));
 
@@ -254,7 +322,7 @@ class ApplicationFormController extends BaseController
     }
 
     private function savePurchaseData(int $studentId, PurchaseHeader $entity): Result {
-        $entity->studentId($studentId);
+        $entity->setStudentId($studentId);
         
         $purchaseHeader = $this->purchaseHeaderRepository->insert($entity);
         
@@ -275,7 +343,7 @@ class ApplicationFormController extends BaseController
     }
 
     private function saveGuardianData(int $studentId, Guardian $entity): Result {
-        $entity->studentId($studentId);
+        $entity->setStudentId($studentId);
 
         $guardian = $this->guardianRepository->insert($entity);  
         

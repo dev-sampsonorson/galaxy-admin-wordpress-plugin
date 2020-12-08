@@ -20,15 +20,15 @@
                     // 'update_date' => 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP'
                 ),
                 'data' => array(
-                    array('id' => 1, 'examName' => 'TOEFL', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 2, 'examName' => 'IELTS', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 3, 'examName' => 'IELTS/UKVI', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 4, 'examName' => 'PEARSON', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 5, 'examName' => 'SAT 1 or 2', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 6, 'examName' => 'ACT', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 7, 'examName' => 'GMAT', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 8, 'examName' => 'GRE', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
-                    array('id' => 9, 'examName' => 'ICDL', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00),
+                    array('id' => 1, 'examName' => 'TOEFL', 'examRegistrationPrice' => 100000.00, 'bookPurchasePrice' => 10000.00, 'lessonEnrolmentPrice' => 65000.00),
+                    array('id' => 2, 'examName' => 'IELTS', 'examRegistrationPrice' => 85000.00, 'bookPurchasePrice' => 10000.00, 'lessonEnrolmentPrice' => 65000.00),
+                    array('id' => 3, 'examName' => 'IELTS/UKVI', 'examRegistrationPrice' => 65000.00, 'bookPurchasePrice' => 10000.00, 'lessonEnrolmentPrice' => 65000.00),
+                    //array('id' => 4, 'examName' => 'PEARSON', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00), // TODO
+                    array('id' => 4, 'examName' => 'SAT 1 or 2', 'examRegistrationPrice' => 65000.00, 'bookPurchasePrice' => 15000.00, 'lessonEnrolmentPrice' => 65000.00),
+                    array('id' => 5, 'examName' => 'ACT', 'examRegistrationPrice' => 85000.00, 'bookPurchasePrice' => 15000.00, 'lessonEnrolmentPrice' => 100000.00),
+                    array('id' => 6, 'examName' => 'GMAT', 'examRegistrationPrice' => 130000.00, 'bookPurchasePrice' => 20000.00, 'lessonEnrolmentPrice' => 135000.00),
+                    array('id' => 7, 'examName' => 'GRE', 'examRegistrationPrice' => 120000.00, 'bookPurchasePrice' => 15000.00, 'lessonEnrolmentPrice' => 65000.00),
+                    //array('id' => 9, 'examName' => 'ICDL', 'examRegistrationPrice' => 1000.00, 'bookPurchasePrice' => 1000.00, 'lessonEnrolmentPrice' => 1000.00), // TODO
                 )
             ),
             BaseRepository::PURCHASE_HEADER_TABLE_NAME => array(

@@ -9,7 +9,7 @@ export default class ValidationError extends Error {
         this.args = args;
     }
 
-    getArgs() {
+    public getArgs() {
         return this.args;
     }
 }
